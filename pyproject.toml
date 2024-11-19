@@ -1,0 +1,40 @@
+[project]
+name = "new-traders"
+version = "0.1.0"
+description = "Add your description here"
+authors = [
+    { name = "Daniel J Brown", email = "browndj3@gmail.com" }
+]
+dependencies = [
+    "python-dotenv>=1.0.1",
+    "pydantic>=2.8.2",
+    "pyrate-limiter>=3.7.0",
+    "polyfactory>=2.17.0",
+    "niquests>=3.9.0",
+]
+readme = "README.md"
+requires-python = ">= 3.12"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.rye]
+managed = true
+dev-dependencies = [
+    "ipython>=8.26.0",
+    "datamodel-code-generator>=0.25.8",
+]
+
+[tool.hatch.metadata]
+allow-direct-references = true
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/new_traders"]
+
+[tool.uv]
+dev-dependencies = [
+    "ipython>=8.28.0",
+    "pillow>=10.4.0",
+    "rich>=13.9.2",
+]
