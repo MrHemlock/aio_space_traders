@@ -6,11 +6,9 @@ authors = [
     { name = "Daniel J Brown", email = "browndj3@gmail.com" }
 ]
 dependencies = [
-    "python-dotenv>=1.0.1",
     "pydantic>=2.8.2",
-    "pyrate-limiter>=3.7.0",
     "polyfactory>=2.17.0",
-    "niquests>=3.9.0",
+    "niquests[http3,ocsp,speedups]>=3.9.0",
 ]
 readme = "README.md"
 requires-python = ">= 3.12"
