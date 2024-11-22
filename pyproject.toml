@@ -1,5 +1,5 @@
 [project]
-name = "new-traders"
+name = "aioSpaceTraders"
 version = "0.1.0"
 description = "Add your description here"
 authors = [
@@ -7,8 +7,7 @@ authors = [
 ]
 dependencies = [
     "pydantic>=2.8.2",
-    "polyfactory>=2.17.0",
-    "niquests[http3,ocsp,speedups]>=3.9.0",
+    "niquests[http3,ocsp,speedups]>=3.11.0",
 ]
 readme = "README.md"
 requires-python = ">= 3.12"
@@ -16,13 +15,6 @@ requires-python = ">= 3.12"
 [build-system]
 requires = ["hatchling"]
 build-backend = "hatchling.build"
-
-[tool.rye]
-managed = true
-dev-dependencies = [
-    "ipython>=8.26.0",
-    "datamodel-code-generator>=0.25.8",
-]
 
 [tool.hatch.metadata]
 allow-direct-references = true
@@ -33,6 +25,6 @@ packages = ["src/new_traders"]
 [tool.uv]
 dev-dependencies = [
     "ipython>=8.28.0",
-    "pillow>=10.4.0",
+    "polyfactory>=2.17.0",
     "rich>=13.9.2",
 ]
