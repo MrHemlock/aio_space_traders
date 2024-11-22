@@ -1883,9 +1883,42 @@ class ListAgentsResponse(BaseModel):
     data: list[Agent]
     meta: PaginationMetadata
 
+
 class ListContractsResponse(BaseModel):
     data: list[Contract]
     meta: PaginationMetadata
 
+
+class GetAgentResponse(BaseModel):
+    data: Agent
+
+
+class GetContractResponse(BaseModel):
+    data: Contract
+
+
+class AcceptContractData(BaseModel):
+    agent: Agent
+    contract: Contract
+
+
 class AcceptContractResponse(BaseModel):
-    ...
+    data: AcceptContractData
+
+
+class DeliverCargoToContractData(BaseModel):
+    contract: Contract
+    cargo: ShipCargo
+
+
+class DeliverCargoToContractResponse(BaseModel):
+    data: DeliverCargoToContractData
+
+
+class FulfillContractData(BaseModel):
+    agent: Agent
+    contract: Contract
+
+
+class FulFillContractResponse(BaseModel):
+    data: FulfillContractData
