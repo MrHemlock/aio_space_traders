@@ -4,13 +4,13 @@
 
 from __future__ import annotations
 
-from enum import Enum
-from typing import List, Optional
+from enum import StrEnum
+from typing import Optional
 
 from pydantic import AwareDatetime, BaseModel, Field, RootModel
 
 
-class ActivityLevel(Enum):
+class ActivityLevel(StrEnum):
     WEAK = "WEAK"
     GROWING = "GROWING"
     STRONG = "STRONG"
@@ -45,7 +45,7 @@ class Agent(BaseModel):
     )
 
 
-class Type(Enum):
+class Type(StrEnum):
     PROCUREMENT = "PROCUREMENT"
     TRANSPORT = "TRANSPORT"
     SHUTTLE = "SHUTTLE"
@@ -95,7 +95,7 @@ class ContractTerms(BaseModel):
         description="The deadline for the contract.",
     )
     payment: ContractPayment
-    deliver: Optional[List[ContractDeliverGood]] = Field(
+    deliver: Optional[list[ContractDeliverGood]] = Field(
         None,
         description="The cargo that needs to be delivered to fulfill the contract.",
     )
@@ -126,7 +126,7 @@ class Cooldown(BaseModel):
     )
 
 
-class FactionSymbol(Enum):
+class FactionSymbol(StrEnum):
     COSMIC = "COSMIC"
     VOID = "VOID"
     GALACTIC = "GALACTIC"
@@ -148,7 +148,7 @@ class FactionSymbol(Enum):
     ETHEREAL = "ETHEREAL"
 
 
-class FactionTraitSymbol(Enum):
+class FactionTraitSymbol(StrEnum):
     BUREAUCRATIC = "BUREAUCRATIC"
     SECRETIVE = "SECRETIVE"
     CAPITALISTIC = "CAPITALISTIC"
@@ -210,13 +210,13 @@ class FactionTraitSymbol(Enum):
     ENTREPRENEURIAL = "ENTREPRENEURIAL"
 
 
-class Type1(Enum):
+class Type1(StrEnum):
     EXPORT = "EXPORT"
     IMPORT_ = "IMPORT"
     EXCHANGE = "EXCHANGE"
 
 
-class Type2(Enum):
+class Type2(StrEnum):
     PURCHASE = "PURCHASE"
     SELL = "SELL"
 
@@ -286,7 +286,7 @@ class ShipComponentIntegrity(RootModel[float]):
     )
 
 
-class Symbol(Enum):
+class Symbol(StrEnum):
     REACTOR_OVERLOAD = "REACTOR_OVERLOAD"
     ENERGY_SPIKE_FROM_MINERAL = "ENERGY_SPIKE_FROM_MINERAL"
     SOLAR_FLARE_INTERFERENCE = "SOLAR_FLARE_INTERFERENCE"
@@ -316,7 +316,7 @@ class Symbol(Enum):
     ATMOSPHERIC_ENTRY_HEAT = "ATMOSPHERIC_ENTRY_HEAT"
 
 
-class Component(Enum):
+class Component(StrEnum):
     FRAME = "FRAME"
     REACTOR = "REACTOR"
     ENGINE = "ENGINE"
@@ -335,7 +335,7 @@ class ShipConditionEvent(BaseModel):
     )
 
 
-class Rotation(Enum):
+class Rotation(StrEnum):
     STRICT = "STRICT"
     RELAXED = "RELAXED"
 
@@ -368,14 +368,14 @@ class ShipCrew(BaseModel):
     )
 
 
-class Symbol1(Enum):
+class Symbol1(StrEnum):
     ENGINE_IMPULSE_DRIVE_I = "ENGINE_IMPULSE_DRIVE_I"
     ENGINE_ION_DRIVE_I = "ENGINE_ION_DRIVE_I"
     ENGINE_ION_DRIVE_II = "ENGINE_ION_DRIVE_II"
     ENGINE_HYPER_DRIVE_I = "ENGINE_HYPER_DRIVE_I"
 
 
-class Symbol2(Enum):
+class Symbol2(StrEnum):
     FRAME_PROBE = "FRAME_PROBE"
     FRAME_DRONE = "FRAME_DRONE"
     FRAME_INTERCEPTOR = "FRAME_INTERCEPTOR"
@@ -445,7 +445,7 @@ class ShipModificationTransaction(BaseModel):
     )
 
 
-class Symbol3(Enum):
+class Symbol3(StrEnum):
     MODULE_MINERAL_PROCESSOR_I = "MODULE_MINERAL_PROCESSOR_I"
     MODULE_GAS_PROCESSOR_I = "MODULE_GAS_PROCESSOR_I"
     MODULE_CARGO_HOLD_I = "MODULE_CARGO_HOLD_I"
@@ -468,7 +468,7 @@ class Symbol3(Enum):
     MODULE_SHIELD_GENERATOR_II = "MODULE_SHIELD_GENERATOR_II"
 
 
-class Symbol4(Enum):
+class Symbol4(StrEnum):
     MOUNT_GAS_SIPHON_I = "MOUNT_GAS_SIPHON_I"
     MOUNT_GAS_SIPHON_II = "MOUNT_GAS_SIPHON_II"
     MOUNT_GAS_SIPHON_III = "MOUNT_GAS_SIPHON_III"
@@ -486,7 +486,7 @@ class Symbol4(Enum):
     MOUNT_TURRET_I = "MOUNT_TURRET_I"
 
 
-class Deposit(Enum):
+class Deposit(StrEnum):
     QUARTZ_SAND = "QUARTZ_SAND"
     SILICON_CRYSTALS = "SILICON_CRYSTALS"
     PRECIOUS_STONES = "PRECIOUS_STONES"
@@ -503,20 +503,20 @@ class Deposit(Enum):
     MERITIUM_ORE = "MERITIUM_ORE"
 
 
-class ShipNavFlightMode(Enum):
+class ShipNavFlightMode(StrEnum):
     DRIFT = "DRIFT"
     STEALTH = "STEALTH"
     CRUISE = "CRUISE"
     BURN = "BURN"
 
 
-class ShipNavStatus(Enum):
+class ShipNavStatus(StrEnum):
     IN_TRANSIT = "IN_TRANSIT"
     IN_ORBIT = "IN_ORBIT"
     DOCKED = "DOCKED"
 
 
-class Symbol5(Enum):
+class Symbol5(StrEnum):
     REACTOR_SOLAR_I = "REACTOR_SOLAR_I"
     REACTOR_FUSION_I = "REACTOR_FUSION_I"
     REACTOR_FISSION_I = "REACTOR_FISSION_I"
@@ -539,7 +539,7 @@ class ShipRequirements(BaseModel):
     )
 
 
-class ShipRole(Enum):
+class ShipRole(StrEnum):
     FABRICATOR = "FABRICATOR"
     HARVESTER = "HARVESTER"
     HAULER = "HAULER"
@@ -556,7 +556,7 @@ class ShipRole(Enum):
     REFINERY = "REFINERY"
 
 
-class ShipType(Enum):
+class ShipType(StrEnum):
     SHIP_PROBE = "SHIP_PROBE"
     SHIP_MINING_DRONE = "SHIP_MINING_DRONE"
     SHIP_SIPHON_DRONE = "SHIP_SIPHON_DRONE"
@@ -580,7 +580,7 @@ class Crew(BaseModel):
     capacity: int
 
 
-class SupplyLevel(Enum):
+class SupplyLevel(StrEnum):
     SCARCE = "SCARCE"
     LIMITED = "LIMITED"
     MODERATE = "MODERATE"
@@ -588,7 +588,7 @@ class SupplyLevel(Enum):
     ABUNDANT = "ABUNDANT"
 
 
-class Size(Enum):
+class Size(StrEnum):
     SMALL = "SMALL"
     MODERATE = "MODERATE"
     LARGE = "LARGE"
@@ -613,7 +613,7 @@ class SystemSymbol(RootModel[str]):
     )
 
 
-class SystemType(Enum):
+class SystemType(StrEnum):
     NEUTRON_STAR = "NEUTRON_STAR"
     RED_STAR = "RED_STAR"
     ORANGE_STAR = "ORANGE_STAR"
@@ -626,7 +626,7 @@ class SystemType(Enum):
     UNSTABLE = "UNSTABLE"
 
 
-class TradeSymbol(Enum):
+class TradeSymbol(StrEnum):
     PRECIOUS_STONES = "PRECIOUS_STONES"
     QUARTZ_SAND = "QUARTZ_SAND"
     SILICON_CRYSTALS = "SILICON_CRYSTALS"
@@ -776,7 +776,7 @@ class WaypointFaction(BaseModel):
     symbol: FactionSymbol
 
 
-class WaypointModifierSymbol(Enum):
+class WaypointModifierSymbol(StrEnum):
     STRIPPED = "STRIPPED"
     UNSTABLE = "UNSTABLE"
     RADIATION_LEAK = "RADIATION_LEAK"
@@ -800,7 +800,7 @@ class WaypointSymbol(RootModel[str]):
     )
 
 
-class WaypointTraitSymbol(Enum):
+class WaypointTraitSymbol(StrEnum):
     UNCHARTED = "UNCHARTED"
     UNDER_CONSTRUCTION = "UNDER_CONSTRUCTION"
     MARKETPLACE = "MARKETPLACE"
@@ -872,7 +872,7 @@ class WaypointTraitSymbol(Enum):
     STRIPPED = "STRIPPED"
 
 
-class WaypointType(Enum):
+class WaypointType(StrEnum):
     PLANET = "PLANET"
     GAS_GIANT = "GAS_GIANT"
     MOON = "MOON"
@@ -974,7 +974,7 @@ class FactionTrait(BaseModel):
 
 class JumpGate(BaseModel):
     symbol: WaypointSymbol
-    connections: List[str] = Field(
+    connections: list[str] = Field(
         ...,
         description="All the gates that are connected to this waypoint.",
     )
@@ -1237,7 +1237,7 @@ class ShipMount(BaseModel):
         description="Mounts that have this value, such as mining lasers, denote how powerful this mount's capabilities are.",
         ge=0,
     )
-    deposits: Optional[List[Deposit]] = Field(
+    deposits: Optional[list[Deposit]] = Field(
         None,
         description="Mounts that have this value denote what goods can be produced from using the mount.",
     )
@@ -1313,8 +1313,8 @@ class ShipyardShip(BaseModel):
     frame: ShipFrame
     reactor: ShipReactor
     engine: ShipEngine
-    modules: List[ShipModule]
-    mounts: List[ShipMount]
+    modules: list[ShipModule]
+    mounts: list[ShipMount]
     crew: Crew
 
 
@@ -1367,7 +1367,7 @@ class Survey(BaseModel):
         description="The symbol of the waypoint that this survey is for.",
         min_length=1,
     )
-    deposits: List[SurveyDeposit] = Field(
+    deposits: list[SurveyDeposit] = Field(
         ...,
         description="A list of deposits that can be found at this location. A ship will extract one of these deposits when using this survey in an extraction request. If multiple deposits of the same type are present, the chance of extracting that deposit is increased.",
     )
@@ -1392,7 +1392,7 @@ class SystemWaypoint(BaseModel):
         ...,
         description="Relative position of the waypoint on the system's y axis. This is not an absolute position in the universe.",
     )
-    orbitals: List[WaypointOrbital] = Field(
+    orbitals: list[WaypointOrbital] = Field(
         ...,
         description="Waypoints that orbit this waypoint.",
     )
@@ -1444,7 +1444,7 @@ class Construction(BaseModel):
         ...,
         description="The symbol of the waypoint.",
     )
-    materials: List[ConstructionMaterial] = Field(
+    materials: list[ConstructionMaterial] = Field(
         ...,
         description="The materials required to construct the waypoint.",
     )
@@ -1483,9 +1483,9 @@ class Faction(BaseModel):
         description="The waypoint in which the faction's HQ is located in.",
         min_length=1,
     )
-    traits: List[FactionTrait] = Field(
+    traits: list[FactionTrait] = Field(
         ...,
-        description="List of traits that define this faction.",
+        description="list of traits that define this faction.",
     )
     is_recruiting: bool = Field(
         ...,
@@ -1499,23 +1499,23 @@ class Market(BaseModel):
         ...,
         description="The symbol of the market. The symbol is the same as the waypoint where the market is located.",
     )
-    exports: List[TradeGood] = Field(
+    exports: list[TradeGood] = Field(
         ...,
         description="The list of goods that are exported from this market.",
     )
-    imports: List[TradeGood] = Field(
+    imports: list[TradeGood] = Field(
         ...,
         description="The list of goods that are sought as imports in this market.",
     )
-    exchange: List[TradeGood] = Field(
+    exchange: list[TradeGood] = Field(
         ...,
         description="The list of goods that are bought and sold between agents at this market.",
     )
-    transactions: Optional[List[MarketTransaction]] = Field(
+    transactions: Optional[list[MarketTransaction]] = Field(
         None,
         description="The list of recent transactions at this market. Visible only when a ship is present at the market.",
     )
-    trade_goods: Optional[List[MarketTradeGood]] = Field(
+    trade_goods: Optional[list[MarketTradeGood]] = Field(
         None,
         alias="tradeGoods",
         description="The list of goods that are traded at this market. Visible only when a ship is present at the market.",
@@ -1537,12 +1537,12 @@ class ScannedWaypoint(BaseModel):
         ...,
         description="Position in the universe in the y axis.",
     )
-    orbitals: List[WaypointOrbital] = Field(
+    orbitals: list[WaypointOrbital] = Field(
         ...,
-        description="List of waypoints that orbit this waypoint.",
+        description="list of waypoints that orbit this waypoint.",
     )
     faction: Optional[WaypointFaction] = None
-    traits: List[WaypointTrait] = Field(
+    traits: list[WaypointTrait] = Field(
         ...,
         description="The traits of the waypoint.",
     )
@@ -1560,7 +1560,7 @@ class ShipCargo(BaseModel):
         description="The number of items currently stored in the cargo hold.",
         ge=0,
     )
-    inventory: List[ShipCargoItem] = Field(
+    inventory: list[ShipCargoItem] = Field(
         ...,
         description="The items currently in the cargo hold.",
     )
@@ -1586,16 +1586,16 @@ class Shipyard(BaseModel):
         description="The symbol of the shipyard. The symbol is the same as the waypoint where the shipyard is located.",
         min_length=1,
     )
-    ship_types: List[ShipType1] = Field(
+    ship_types: list[ShipType1] = Field(
         ...,
         alias="shipTypes",
         description="The list of ship types available for purchase at this shipyard.",
     )
-    transactions: Optional[List[ShipyardTransaction]] = Field(
+    transactions: Optional[list[ShipyardTransaction]] = Field(
         None,
         description="The list of recent transactions at this shipyard.",
     )
-    ships: Optional[List[ShipyardShip]] = Field(
+    ships: Optional[list[ShipyardShip]] = Field(
         None,
         description="The ships that are currently available for purchase at the shipyard.",
     )
@@ -1626,7 +1626,10 @@ class System(BaseModel):
         min_length=1,
     )
     sector_symbol: str = Field(
-        ..., alias="sectorSymbol", description="The symbol of the sector.", min_length=1
+        ...,
+        alias="sectorSymbol",
+        description="The symbol of the sector.",
+        min_length=1,
     )
     type: SystemType
     x: int = Field(
@@ -1637,11 +1640,11 @@ class System(BaseModel):
         ...,
         description="Relative position of the system in the sector in the y axis.",
     )
-    waypoints: List[SystemWaypoint] = Field(
+    waypoints: list[SystemWaypoint] = Field(
         ...,
         description="Waypoints in this system.",
     )
-    factions: List[SystemFaction] = Field(
+    factions: list[SystemFaction] = Field(
         ...,
         description="Factions that control this system.",
     )
@@ -1662,7 +1665,7 @@ class Waypoint(BaseModel):
         ...,
         description="Relative position of the waypoint on the system's y axis. This is not an absolute position in the universe.",
     )
-    orbitals: List[WaypointOrbital] = Field(
+    orbitals: list[WaypointOrbital] = Field(
         ...,
         description="Waypoints that orbit this waypoint.",
     )
@@ -1672,11 +1675,11 @@ class Waypoint(BaseModel):
         min_length=1,
     )
     faction: Optional[WaypointFaction] = None
-    traits: List[WaypointTrait] = Field(
+    traits: list[WaypointTrait] = Field(
         ...,
         description="The traits of the waypoint.",
     )
-    modifiers: Optional[List[WaypointModifier]] = Field(
+    modifiers: Optional[list[WaypointModifier]] = Field(
         None,
         description="The modifiers of the waypoint.",
     )
@@ -1724,9 +1727,9 @@ class ScannedShip(BaseModel):
         ...,
         description="The engine of the ship.",
     )
-    mounts: Optional[List[Mount]] = Field(
+    mounts: Optional[list[Mount]] = Field(
         None,
-        description="List of mounts installed in the ship.",
+        description="list of mounts installed in the ship.",
     )
 
 
@@ -1742,11 +1745,11 @@ class Ship(BaseModel):
     reactor: ShipReactor
     engine: ShipEngine
     cooldown: Cooldown
-    modules: List[ShipModule] = Field(
+    modules: list[ShipModule] = Field(
         ...,
         description="Modules installed in this ship.",
     )
-    mounts: List[ShipMount] = Field(
+    mounts: list[ShipMount] = Field(
         ...,
         description="Mounts installed in this ship.",
     )
@@ -1922,3 +1925,223 @@ class FulfillContractData(BaseModel):
 
 class FulFillContractResponse(BaseModel):
     data: FulfillContractData
+
+
+class ListFactionsResponse(BaseModel):
+    data: list[Faction]
+    meta: PaginationMetadata
+
+
+class GetFactionResponse(BaseModel):
+    data: Faction
+
+
+class ListShipsResponse(BaseModel):
+    data: list[Ship]
+    meta: PaginationMetadata
+
+
+class PurchaseShipData(BaseModel):
+    agent: Agent
+    ship: Ship
+    transaction: ShipyardTransaction
+
+
+class PurchaseShipResponse(BaseModel):
+    data: PurchaseShipData
+
+
+class GetShipResponse(BaseModel):
+    data: Ship
+
+
+class GetShipCargoResponse(BaseModel):
+    data: ShipCargo
+
+
+class OrbitShipResponse(BaseModel):
+    data: ShipNav
+
+
+class SimpleGoods(BaseModel):
+    trade_symbol: TradeSymbol
+    units: int
+
+
+class ShipRefineData(BaseModel):
+    cargo: ShipCargo
+    cooldown: Cooldown
+    produced: list[SimpleGoods]
+    consumed: list[SimpleGoods]
+
+
+class ShipRefineResponse(BaseModel):
+    data: ShipRefineData
+
+
+class CreateChartData(BaseModel):
+    chart: Chart
+    waypoint: Waypoint
+
+
+class CreateChartResponse(BaseModel):
+    data: CreateChartData
+
+
+class GetShipCooldownResponse(BaseModel):
+    data: Cooldown
+
+
+class DockShipResponse(BaseModel):
+    data: ShipNav
+
+
+class CreateSurveyData(BaseModel):
+    cooldown: Cooldown
+    surveys: list[Survey]
+
+
+class CreateSurveyResponse(BaseModel):
+    data: CreateSurveyData
+
+
+class ExtractResourcesData(BaseModel):
+    cooldown: Cooldown
+    extraction: Extraction
+    cargo: ShipCargo
+    events: list[ShipConditionEvent | None]
+
+
+class ExtractResourcesResponse(BaseModel):
+    data: ExtractResourcesData
+
+
+class SiphonGasData(BaseModel):
+    cooldown: Cooldown
+    siphon: Siphon
+    cargo: ShipCargo
+    events: list[ShipConditionEvent | None]
+
+
+class SiphonGasResponse(BaseModel):
+    data: SiphonGasData
+
+
+class ExtractResourcesWithSurveyData(BaseModel):
+    cooldown: Cooldown
+    extraction: Extraction
+    cargo: ShipCargo
+    events: list[ShipConditionEvent | None]
+
+
+class ExtractResourcesWithSurveyResponse(BaseModel):
+    data: ExtractResourcesWithSurveyData
+
+
+class JettisonCargoResponse(BaseModel):
+    data: ShipCargo
+
+
+class GenericCargoObject(BaseModel):
+    symbol: TradeSymbol
+    units: int = Field(
+        ...,
+        ge=1,
+    )
+
+
+class JumpShipData(BaseModel):
+    nav: ShipNav
+    cooldown: Cooldown
+    transaction: MarketTransaction
+    agent: Agent
+
+
+class JumpShipResponse(BaseModel):
+    data: JumpShipData
+
+
+class NavigateShipData(BaseModel):
+    fuel: ShipFuel
+    nav: ShipNav
+    events: list[ShipConditionEvent | None]
+
+
+class NavigateShipResponse(BaseModel):
+    data: NavigateShipData
+
+
+class PatchShipNavResponse(BaseModel):
+    data: ShipNav
+
+
+class GetShipNavResponse(BaseModel):
+    data: ShipNav
+
+
+class WarpShipData(BaseModel):
+    fuel: ShipFuel
+    nav: ShipNav
+
+
+class WarpShipResponse(BaseModel):
+    data: WarpShipData
+
+
+class SellCargoData(BaseModel):
+    agent: Agent
+    cargo: ShipCargo
+    transaction: MarketTransaction
+
+
+class SellCargoResponse(BaseModel):
+    data: SellCargoData
+
+
+class ScanSystemsData(BaseModel):
+    cooldown: Cooldown
+    systems: list[System]
+
+
+class ScanSystemsResponse(BaseModel):
+    data: ScanSystemsData
+
+
+class ScanWaypointsData(BaseModel):
+    cooldown: Cooldown
+    waypoints: list[Waypoint]
+
+
+class ScanWaypointsResponse(BaseModel):
+    data: ScanWaypointsData
+
+
+class ScanShipsData(BaseModel):
+    cooldown: Cooldown
+    waypoints: list[Ship]
+
+
+class ScanShipsResponse(BaseModel):
+    data: ScanShipsData
+
+
+class RefuelObject(BaseModel):
+    units: int = Field(
+        ...,
+        ge=1,
+        description="The amount of fuel to fill in the ship's tanks. When not specified, the ship will be refueled to its maximum fuel capacity. If the amount specified is greater than the ship's remaining capacity, the ship will only be refueled to its maximum fuel capacity. The amount specified is not in market units but in ship fuel units.",
+    )
+    from_cargo: bool = Field(
+        False,
+        description="Whether to use the FUEL that's in your cargo or not. Default: false",
+    )
+
+
+class RefuelShipData(BaseModel):
+    agent: Agent
+    fuel: ShipFuel
+    transaction: MarketTransaction
+
+
+class RefuelShipResponse(BaseModel):
+    data: RefuelShipData
