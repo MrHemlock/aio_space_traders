@@ -16,14 +16,14 @@ T = TypeVar("T")
 class SpaceTraders:
     def __init__(self, token: str | None) -> None:
         self.session: AsyncSession = AsyncSession(
-            base_url="https://api.spacetraders.io/v2"
+            base_url="https://api.spacetraders.io/v2",
         )
         self.token = token
         self.session.headers.update(
             {
                 "Accept": "application/json",
                 "Content-Type": "application/json",
-            }
+            },
         )
         if self.token:
             self.session.headers.update({"Authorization": f"Bearer {self.token}"})
@@ -378,7 +378,7 @@ class SpaceTraders:
     async def jettison_cargo(
         self,
         ship_symbol: str,
-        cargo_to_jettison: model.GenericCargoObject,
+        cargo_to_jettison: model.JettisonCargoObject,
     ) -> model.JettisonCargoResponse:
         return await self._request(
             model.JettisonCargoResponse,
@@ -448,7 +448,7 @@ class SpaceTraders:
     async def sell_cargo(
         self,
         ship_symbol: str,
-        cargo_to_sell: model.GenericCargoObject,
+        cargo_to_sell: model.SellCargoObject,
     ) -> model.SellCargoResponse:
         return await self._request(
             model.SellCargoResponse,
@@ -499,8 +499,113 @@ class SpaceTraders:
             data=refuel_object.model_dump(),
         )
 
-    async def purchase_cargo(self):...
+    async def purchase_cargo(
+        self,
+        ship_symbol: str,
+        purchase_object: model.PurchaseCargoObject,
+    ) -> model.PurchaseCargoResponse:
+        return await self._request(
+            model.PurchaseCargoResponse,
+            "POST",
+            f"/my/ships/{ship_symbol}/purchase",
+            data=purchase_object.model_dump(),
+        )
 
+    async def transfer_cargo(
+        self,
+        ship_symbol: str,
+        transfer_object: model.TransferCargoObject,
+    ) -> model.TransferCargoResponse:
+        return await self._request(
+            model.TransferCargoResponse,
+            "POST",
+            f"/my/ships/{ship_symbol}/transfer",
+            data=transfer_object.model_dump(),
+        )
+
+    async def negotiate_contract(
+        self,
+        ship_symbol: str,
+    ) -> model.NegotiateContractResponse:
+        return await self._request(
+            model.NegotiateContractResponse,
+            "POST",
+            f"/my/ships/{ship_symbol}/negotiate/contract",
+        )
+
+    async def get_mounts(
+        self,
+        ship_symbol: str,
+    ) -> model.GetMountsResponse:
+        return await self._request(
+            model.GetMountsResponse,
+            "GET",
+            f"/my/ships/{ship_symbol}/mounts",
+        )
+
+    async def install_mount(
+        self,
+        ship_symbol: str,
+        mount_symbol: str,
+    ) -> model.InstallMountResponse:
+        return await self._request(
+            model.InstallMountResponse,
+            "POST",
+            f"/my/ships/{ship_symbol}/mounts/install",
+            data={"symbol": mount_symbol},
+        )
+
+    async def remove_mount(
+        self,
+        ship_symbol: str,
+        mount_symbol: str,
+    ) -> model.RemoveMountResponse:
+        return await self._request(
+            model.RemoveMountResponse,
+            "POST",
+            f"/my/ships/{ship_symbol}/mounts/remove",
+            data={"symbol": mount_symbol},
+        )
+
+    async def get_scrap_ship(
+        self,
+        ship_symbol: str,
+    ) -> model.GetScrapShipResponse:
+        return await self._request(
+            model.GetScrapShipResponse,
+            "GET",
+            f"/my/ships/{ship_symbol}/scrap",
+        )
+
+    async def scrap_ship(
+        self,
+        ship_symbol: str,
+    ) -> model.ScrapShipResponse:
+        return await self._request(
+            model.ScrapShipResponse,
+            "POST",
+            f"/my/ships/{ship_symbol}/scrap",
+        )
+
+    async def get_repair_ship(
+        self,
+        ship_symbol: str,
+    ) -> model.GetRepairShipResponse:
+        return await self._request(
+            model.GetRepairShipResponse,
+            "GET",
+            f"/my/ships/{ship_symbol}/repair",
+        )
+
+    async def repair_ship(
+        self,
+        ship_symbol: str,
+    ) -> model.RepairShipResponse:
+        return await self._request(
+            model.RepairShipResponse,
+            "POST",
+            f"/my/ships/{ship_symbol}/repair",
+        )
 
     def update_token(
         self,
