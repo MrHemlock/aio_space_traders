@@ -20,7 +20,7 @@ build-backend = "hatchling.build"
 allow-direct-references = true
 
 [tool.hatch.build.targets.wheel]
-packages = ["src/new_traders"]
+packages = ["src/aio_space_traders"]
 
 [tool.uv]
 dev-dependencies = [
