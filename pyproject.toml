@@ -1,5 +1,5 @@
 [project]
-name = "aioSpaceTraders"
+name = "aio_space_traders"
 version = "0.1.0"
 description = "Add your description here"
 authors = [
