@@ -14,7 +14,7 @@ T = TypeVar("T")
 
 
 class SpaceTraders:
-    def __init__(self, token: str | None) -> None:
+    def __init__(self, token: str | None = None) -> None:
         self.session: AsyncSession = AsyncSession(
             base_url="https://api.spacetraders.io/v2",
         )
@@ -58,36 +58,27 @@ class SpaceTraders:
             json=data,
         )
         if not response.ok:
-            self._handle_error(response)
+            await self._handle_error(response)
         json_data = await response.json()
         return response_model(**json_data)
 
-    def _handle_error(self, response: Response):
+    async def _handle_error(self, response: Response):
         response_json = {}
         try:
-            response_json = response.json()
+            response_json = await response.json()
         except RequestsJSONDecodeError:
-            response.raise_for_status()  # pyright: ignore[reportUnusedCallResult]
+            response.raise_for_status()
 
-        error = response_json["error"]
-        code = error["code"]
-        message = error["message"]
-        error_type = ERROR_MAPPING.get(code)
+        error = response_json.get("error", {})
+        code = error.get("code", "unknown")
+        message = error.get("message", "An unkown error occurred.")
+        error_type = ERROR_MAPPING.get(code, SpaceTradersAPIError)
 
-        try:
-            response.raise_for_status()  # pyright: ignore[reportUnusedCallResult]
-        except Exception as e:
-            if not error_type:
-                raise SpaceTradersAPIError(
-                    code,
-                    message,
-                    response_json,
-                ) from e
-            raise error_type(
-                code,
-                message,
-                response_json,
-            ) from e
+        raise error_type(
+            code,
+            message,
+            response_json,
+        )
 
     async def get_status(self) -> model.ServerStatsResponse:
         """Fetch the current status of the server."""
