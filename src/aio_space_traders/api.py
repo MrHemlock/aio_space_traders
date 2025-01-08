@@ -197,9 +197,9 @@ class SpaceTraders:
     async def fulfill_contract(
         self,
         contract_id: str,
-    ) -> model.FulFillContractResponse:
+    ) -> model.FulfillContractResponse:
         return await self._request(
-            model.FulFillContractResponse,
+            model.FulfillContractResponse,
             "POST",
             f"/my/contracts/{contract_id}/fulfill",
         )
@@ -241,7 +241,10 @@ class SpaceTraders:
         ship_type: model.ShipType,
         waypoint_symbol: str,
     ) -> model.PurchaseShipResponse:
-        data = {"shipType": ship_type, "waypointSymbol": waypoint_symbol}
+        data = {
+            "shipType": ship_type,
+            "waypointSymbol": waypoint_symbol,
+        }
         return await self._request(
             model.PurchaseShipResponse,
             "POST",

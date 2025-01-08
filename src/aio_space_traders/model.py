@@ -1241,7 +1241,7 @@ class ShipModule(BaseAPIModel):
 class ShipMount(BaseAPIModel):
     symbol: Symbol4 = Field(
         ...,
-        description="Symbo of this mount.",
+        description="Symbol of this mount.",
     )
     name: str = Field(
         ...,
@@ -1805,8 +1805,6 @@ class CreditLeader(BaseAPIModel):
     )
     credits: int = Field(
         ...,
-        ge=9007199254740991,
-        le=-9007199254740991,
         description="Amount of credits.",
     )
 
@@ -1818,7 +1816,7 @@ class ChartLeader(BaseAPIModel):
     )
     chart_count: int = Field(
         ...,
-        description="Amouhnt of charts done by the agent.",
+        description="Amount of charts done by the agent.",
     )
 
 
@@ -1834,7 +1832,7 @@ class Leaderboards(BaseAPIModel):
 
 
 class ServerResets(BaseAPIModel):
-    next_: str = Field(
+    next: str = Field(
         ...,
         description="The date and time with the game server will reset",
     )
@@ -1872,7 +1870,7 @@ class ServerStatsResponse(BaseAPIModel):
     leaderboards: Leaderboards
     server_resets: ServerResets
     announcements: list[Announcement]
-    links = list[Link]
+    links: list[Link]
 
 
 class RegisterNewAgentResponse(BaseAPIModel):
@@ -1946,7 +1944,7 @@ class FulfillContractData(BaseAPIModel):
     contract: Contract
 
 
-class FulFillContractResponse(BaseAPIModel):
+class FulfillContractResponse(BaseAPIModel):
     data: FulfillContractData
 
 
