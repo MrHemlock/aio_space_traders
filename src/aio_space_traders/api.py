@@ -1,16 +1,14 @@
+import inspect
 from types import TracebackType
-from typing import Any, TypeVar
+from typing import Any
 
 from niquests import AsyncSession
 from niquests._typing import QueryParameterType
 from niquests.exceptions import JSONDecodeError as RequestsJSONDecodeError
 from niquests.models import Response
 
+from aio_space_traders import model
 from aio_space_traders.errors import ERROR_MAPPING, SpaceTradersAPIError
-
-from . import model
-
-T = TypeVar("T")
 
 
 class SpaceTraders:
@@ -42,7 +40,7 @@ class SpaceTraders:
     ) -> bool | None:
         await self.close()
 
-    async def _request(
+    async def _request[T](
         self,
         response_model: type[T],
         method: str,
@@ -59,22 +57,28 @@ class SpaceTraders:
         )
         if not response.ok:
             await self._handle_error(response)
-        json_data = await response.json()
+
+        json_data = response.json()
+        if inspect.isawaitable(json_data):
+            json_data = await json_data
+
         return response_model(**json_data)
 
     async def _handle_error(self, response: Response):
         response_json = {}
         try:
-            response_json = await response.json()
+            response_json = response.json()
         except RequestsJSONDecodeError:
             response.raise_for_status()
 
+        status_code = response.status_code
         error = response_json.get("error", {})
         code = error.get("code", "unknown")
-        message = error.get("message", "An unkown error occurred.")
+        message = error.get("message", "An unknown error occurred.")
         error_type = ERROR_MAPPING.get(code, SpaceTradersAPIError)
 
         raise error_type(
+            status_code,
             code,
             message,
             response_json,
@@ -107,7 +111,9 @@ class SpaceTraders:
             data=data,
         )
 
-    async def get_agent(self) -> model.GetAgentResponse:
+    async def get_agent(
+        self,
+    ) -> model.GetAgentResponse:
         return await self._request(
             model.GetAgentResponse,
             "GET",
