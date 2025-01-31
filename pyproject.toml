@@ -8,6 +8,7 @@ authors = [
 dependencies = [
     "pydantic>=2.8.2",
     "niquests[http3,ocsp,speedups]>=3.11.0",
+    "python-dotenv>=1.0.1",
 ]
 readme = "README.md"
 requires-python = ">= 3.12"
