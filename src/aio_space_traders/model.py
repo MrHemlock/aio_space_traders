@@ -33,7 +33,6 @@ class Agent(BaseAPIModel):
     headquarters: str = Field(
         ...,
         description="The headquarters of the agent.",
-        min_length=1,
     )
     credits: int = Field(
         ...,
@@ -1582,7 +1581,7 @@ class ShipCargo(BaseAPIModel):
         description="The number of items currently stored in the cargo hold.",
         ge=0,
     )
-    inventory: list[ShipCargoItem] = Field(
+    inventory: list[ShipCargoItem | None] = Field(
         ...,
         description="The items currently in the cargo hold.",
     )
@@ -1825,7 +1824,7 @@ class Leaderboards(BaseAPIModel):
         ...,
         description="Top agents with the most credits.",
     )
-    most_charts_submitted: list[ChartLeader] = Field(
+    most_submitted_charts: list[ChartLeader] = Field(
         ...,
         description="Top agents with the most charted submitted.",
     )
@@ -1852,7 +1851,7 @@ class Link(BaseAPIModel):
     url: str
 
 
-class ServerStatsResponse(BaseAPIModel):
+class ServerStatsData(BaseAPIModel):
     status: str = Field(
         ...,
         description="The current status of the game server.",
@@ -1873,15 +1872,35 @@ class ServerStatsResponse(BaseAPIModel):
     links: list[Link]
 
 
-class RegisterNewAgentResponse(BaseAPIModel):
-    agent: Agent = Field(..., description="Agent details")
-    contract: Contract = Field(..., description="Contract details")
-    faction: Faction = Field(..., description="Faction details")
-    ship: Ship = Field(..., description="Ship details")
+class ServerStasResponse(BaseAPIModel):
+    data: ServerStatsData
+
+
+class RegisterNewAgentData(BaseAPIModel):
+    agent: Agent = Field(
+        ...,
+        description="Agent details",
+    )
+    contract: Contract = Field(
+        ...,
+        description="Contract details",
+    )
+    faction: Faction = Field(
+        ...,
+        description="Faction details",
+    )
+    ship: Ship = Field(
+        ...,
+        description="Ship details",
+    )
     token: str = Field(
         ...,
         description="A Bearer token for accessing secured API endpoints",
     )
+
+
+class RegisterNewAgentResponse(BaseAPIModel):
+    data: RegisterNewAgentData
 
 
 class PaginationMetadata(BaseAPIModel):
