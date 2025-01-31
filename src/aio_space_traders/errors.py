@@ -4,11 +4,16 @@ from typing import Any
 class SpaceTradersAPIError(Exception):
     def __init__(
         self,
+        status_code: int | None,
         error_code: int,
         error_message: str,
         data: dict[str, Any],
     ) -> None:
-        super().__init__(f"({error_code}) {error_message}")
+        if status_code == error_code:
+            super().__init__(f"{{{status_code}}}: {error_message}")
+        else:
+            super().__init__(f"{{{status_code}}} ({error_code}): {error_message}")
+        self.status_code = status_code
         self.error_code = error_code
         self.error_message = error_message
         self.data = data
