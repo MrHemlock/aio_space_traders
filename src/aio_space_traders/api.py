@@ -7,11 +7,11 @@ from niquests._typing import QueryParameterType
 from niquests.exceptions import JSONDecodeError as RequestsJSONDecodeError
 from niquests.models import Response
 
-from aio_space_traders import model
+from aio_space_traders import model, utils
 from aio_space_traders.errors import ERROR_MAPPING, SpaceTradersAPIError
 
 
-class SpaceTraders:
+class SpaceTradersApi:
     def __init__(self, token: str | None = None) -> None:
         self.session: AsyncSession = AsyncSession(
             base_url="https://api.spacetraders.io/v2",
@@ -25,6 +25,7 @@ class SpaceTraders:
         )
         if self.token:
             self.session.headers.update({"Authorization": f"Bearer {self.token}"})
+        self.rate_limiter = utils.AsyncRateLimit()
 
     async def close(self):
         await self.session.close()
@@ -49,6 +50,9 @@ class SpaceTraders:
         params: QueryParameterType | None = None,
         data: dict[str, Any] | None = None,
     ) -> T:
+        # Verifies the request isn't going to exceed the rate limit
+        await self.rate_limiter.acquire()
+
         response = await self.session.request(
             method,
             url,

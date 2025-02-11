@@ -1851,7 +1851,7 @@ class Link(BaseAPIModel):
     url: str
 
 
-class ServerStatsData(BaseAPIModel):
+class ServerStatsResponse(BaseAPIModel):
     status: str = Field(
         ...,
         description="The current status of the game server.",
@@ -1871,9 +1871,6 @@ class ServerStatsData(BaseAPIModel):
     announcements: list[Announcement]
     links: list[Link]
 
-
-class ServerStasResponse(BaseAPIModel):
-    data: ServerStatsData
 
 
 class RegisterNewAgentData(BaseAPIModel):
